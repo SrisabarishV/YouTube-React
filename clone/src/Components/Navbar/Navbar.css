@@ -22,4 +22,9 @@ nav{
 }
 .nav-middle .search-box img{
     width: 15px;
+.nav-middle .search-box{
+    border: 1px solid #ccc;
+    margin-right: 15px;
+    padding: 8px 12px;
+    border-radius: 25px;
 }

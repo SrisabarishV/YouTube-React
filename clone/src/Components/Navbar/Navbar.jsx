@@ -17,8 +17,11 @@ const Navbar = () => {
     </div>
 
     <div className='nav-middle flex-div'>
-        <input type="text" placeholder='search'  />
+      <div className="search-box flex-div">
+    <input type="text" placeholder='search'  />
         <img src={search_icon} alt="" />
+      </div>
+    
     </div>
     <div className='nav-rigt flex-div' >
         <img src={upload_icon} alt="" />
