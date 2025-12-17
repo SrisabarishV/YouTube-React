@@ -24,6 +24,14 @@ nav{
 
     width: 15px;
 }
+.nav-right img{
+    width: 25px;
+    margin-right: 25px;
+} 
+.nav-right .user-icon{
+    width: 35px;
+    border-radius: 50%;
+}
 .nav-middle .search-box{
     border: 1px solid #ccc;
     margin-right: 15px;

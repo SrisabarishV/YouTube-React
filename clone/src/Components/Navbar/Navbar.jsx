@@ -12,8 +12,8 @@ const Navbar = () => {
   return (
     <nav className='flex-div'> 
     <div className='nav-left flex-div'>
-        <img classname='menu-icon' src={menu_icon} alt="" />
-        <img classname='logo' src={logo} alt="" />
+        <img className='menu-icon' src={menu_icon} alt="" />
+        <img className='logo' src={logo} alt="" />
     </div>
 
     <div className='nav-middle flex-div'>
@@ -23,7 +23,7 @@ const Navbar = () => {
       </div>
     
     </div>
-    <div className='nav-rigt flex-div' >
+    <div className='nav-right flex-div' >
         <img src={upload_icon} alt="" />
         <img src={more_icon} alt="" />
         <img src={notification_icon} alt="" />
