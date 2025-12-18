@@ -2,8 +2,8 @@
 import Navbar from './Components/Navbar/Navbar'
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
-import Home from './Pages/Home'
-import Video from './Pages/Videos'
+import Home from './Pages/Home/Home'
+import Video from './Pages/Videos/Video'
 
 
 
