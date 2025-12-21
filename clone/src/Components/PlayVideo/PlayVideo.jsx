@@ -1,4 +1,4 @@
-import React, {  useEffect } from 'react'
+import React, {  use, useEffect } from 'react'
 import './PlayVideo.css'
 import video from '../../assets/video.mp4'
 import like from '../../assets/like.png'
@@ -11,9 +11,11 @@ import { useState} from 'react'
 import { API_KEY } from '../../data'
 import { valueconverter } from '../../data'
 import moment from 'moment'
+import { useParams } from 'react-router-dom'
 
 const PlayVideo = ({videoId, categoryId}) => {
 
+    const {vieoId} = useParams();
     const [apiData,setApiData]=useState(null);
     const [channelData,setChannelData]=useState(null);
     const [commentData,setCommentData]=useState([]);
@@ -38,7 +40,7 @@ const PlayVideo = ({videoId, categoryId}) => {
 
     useEffect(() =>{ 
             fetchVideoData();
-    }, [])
+    }, [videoId])
 
     useEffect(() =>{ 
         fetchOtherData();
