@@ -1,4 +1,4 @@
-import React, { use, useEffect } from 'react'
+import React, {  useEffect } from 'react'
 import './PlayVideo.css'
 import video from '../../assets/video.mp4'
 import like from '../../assets/like.png'
@@ -21,26 +21,20 @@ const PlayVideo = ({videoId, categoryId}) => {
     //fetch video data
     const fetchVideoData= async() =>{
         const videoDetails_url= `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&id=${videoId}&key=${API_KEY}`;
-        await fetch(videoDetails_url)
-        .then(response => response.json())
-        .then(data => setApiData(data.items[0]))
+        await fetch(videoDetails_url).then(response => response.json()).then(data => setApiData(data.items[0]))
    }
 
     //fetch channel data
     const fetchOtherData= async() =>{
     const ChannelData_url= `https://youtube.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&id=${apiData.snippet.channelId}&key=${API_KEY}`;
-    await fetch(ChannelData_url)
-    .then(response => response.json())
-    .then(data => setChannelData(data.items[0]))
+    await fetch(ChannelData_url).then(response => response.json()).then(data => setChannelData(data.items[0]))
+
+    const commentData_url= `https://youtube.googleapis.com/youtube/v3/commentThreads?part=snippet%2Creplies&maxResults=50&videoId=${videoId}&key=${API_KEY}`;
+        await fetch(commentData_url).then(response => response.json()).then(data => setCommentData(data.items))
     }
 
     //fetch comment data
-    const fetchCommentData= async() =>{
-        const commentData_url= `https://youtube.googleapis.com/youtube/v3/commentThreads?part=snippet%2Creplies&videoId=${videoId}&key=${API_KEY}`;
-        await fetch(commentData_url)
-        .then(response => response.json())
-        .then(data => console.log(data.items))
-         }
+    
 
     useEffect(() =>{ 
             fetchVideoData();
@@ -49,9 +43,7 @@ const PlayVideo = ({videoId, categoryId}) => {
     useEffect(() =>{ 
         fetchOtherData();
     }, [apiData])
-    useEffect(() =>{
-        fetchCommentData();
-    }, [commentData])
+
 
   return ( 
     <div className='play-video'>
@@ -85,18 +77,23 @@ const PlayVideo = ({videoId, categoryId}) => {
             <hr />
             <h4>{apiData?valueconverter(apiData.statistics.commentCount):"101"} Comments</h4>
 <br />
-            <div className="comment">
-                <img src={user_profile} alt="user" />
-                <div>
-                    <h3>Jack Nichoson <span>1 day ago</span></h3>
-                    <p>A global computer network providing a variety of information and communication facilities of interconnected networks using standardized communication protocols .</p>
-                    <div className="comment-action">
-                        <img src={like} alt="" />
-                        <span>244</span>
-                        <img src={dislike} alt="" />
+            {commentData.map((item,index) => {
+                return(
+                     <div key={index} className="comment">
+                        <img src={item.snippet.topLevelComment.snippet.authorProfileImageUrl} alt="user" />
+                        <div>
+                            <h3>{item.snippet.topLevelComment.snippet.authorDisplayName} <span>{moment(item.snippet.topLevelComment.snippet.publishedAt).fromNow()}</span></h3>
+                            <p>{item.snippet.topLevelComment.snippet.textDisplay}</p>
+                            <div className="comment-action">
+                                <img src={like} alt="" />
+                                <span>{valueconverter(item.snippet.topLevelComment.snippet.likeCount)}</span>
+                                <img src={dislike} alt="" />
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
+                )
+            })}
+           
             
         </div>
     </div>
